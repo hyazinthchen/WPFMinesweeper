@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFMinesweeper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="200" Width="200">
+    <Window.DataContext>
+        <local:WindowViewModel/>
+    </Window.DataContext>
     <Grid>
+        <TextBlock Text="{Binding Text}"></TextBlock>
         
+        <ListBox ItemsSource="{Binding }"></ListBox>
+        <ListView Margin="10" Name="matrix"/>
     </Grid>
 </Window>
