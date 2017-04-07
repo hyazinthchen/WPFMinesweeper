@@ -1,0 +1,19 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Views="clr-namespace:WPFMinesweeper.Views"
+        xmlns:ViewModels="clr-namespace:WPFMinesweeper.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WPFMinesweeper.Views.MainWindow"
+        Title="Converter"
+        MinWidth="300"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight" d:DesignWidth="992.573" d:DesignHeight="904.42">
+
+    <Window.DataContext>
+        <ViewModels:MatrixViewModel/>
+        <!-- NICHT SICHER -->
+    </Window.DataContext>
+
+    <Views:Matrix Margin="0,0,0,-28"/>
+
+</Window>
