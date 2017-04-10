@@ -9,23 +9,24 @@ namespace WPFMinesweeper.ViewModels
     {
         private readonly Action _action;
 
+        //neues MainWindowViewModel mit einer Action, die es ausführen soll
         public MainWindowViewModel(Action action)
         {
             _action = action;
         }
 
+        //Gibt die gewünschte Action als Parameter an das MainWindowViewModel
         public void Execute(object parameter)
         {
             _action();
         }
 
+        //Enabled den Konvertierbutton, bei False ist er disabled
         public bool CanExecute(object parameter)
         {
             return true;
         }
 
-#pragma warning disable 67
         public event EventHandler CanExecuteChanged { add { } remove { } }
-#pragma warning restore 67
     }
 }

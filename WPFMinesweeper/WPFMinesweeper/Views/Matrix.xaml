@@ -5,14 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ViewModels="clr-namespace:WPFMinesweeper.ViewModels"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" 
-             d:DesignHeight="250"
-             d:DesignWidth="250"
-             d:DataContext="{d:DesignInstance ViewModels:MatrixViewModel}">
-
-    <UserControl.InputBindings>
-        <KeyBinding Key="Enter" Command="{Binding }"/><!-- Hier fehlt Was nach Binding-->
-    </UserControl.InputBindings>
+             mc:Ignorable="d">
 
     <ItemsControl>
         <ItemsControl.ItemsPanel>
@@ -22,7 +15,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Button Content="{Binding}" Command="{Binding ConvertTextCommand}" FontSize="25" Background="DimGray"/>
+                <Button Content="{Binding}" FontSize="25" Background="DimGray"/>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
         <system:String>&#10026;</system:String>

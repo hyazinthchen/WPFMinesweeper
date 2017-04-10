@@ -1,4 +1,6 @@
-﻿namespace WPFMinesweeper.Views
+﻿using System.Windows.Controls;
+
+namespace WPFMinesweeper.Views
 {
     /// <summary>
     /// Interaktionslogik für Matrix.xaml
@@ -8,6 +10,10 @@
         public Matrix()
         {
             InitializeComponent();
+
+            for (int i = 0; i < 100; i++) {
+                Button button = new Button();
+            }
         }
     }
 }

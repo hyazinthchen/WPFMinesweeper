@@ -1,23 +1,49 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WPFMinesweeper.Model
 {
     class MinesweeperModel
     {
-        private readonly Func<string, string> _convertion;
+        public static List<bool> listWithoutMines = new List<bool>();
+        public static List<bool> listWithMines = new List<bool>();
+        public static Random rnd = new Random();
 
-        public MinesweeperModel(Func<string, string> convertion)
+        public static List<bool> GenerateRandomMines(List<bool> allFalseList, int mineCount)
         {
-            _convertion = convertion;
+            for (int i = 0; i < mineCount; i++)
+            {
+                int index = rnd.Next(0, allFalseList.Count + 1);
+                listWithoutMines.Insert(index, true);
+            }
+            listWithMines = listWithoutMines;
+            return listWithMines;
         }
 
-        public string ConvertText(string inputText)
+        public static List<bool> GenerateAllFalseList(int size)
         {
-            return _convertion(inputText);
+            for (int i = 0; i < size; i++)
+            {
+                listWithoutMines.Add(false);
+            }
+            return listWithoutMines;
+        }
+
+        public static List<bool> GenerateMatrixMines(int fieldsize) {
+            switch (fieldsize)
+            {
+                case 10:
+                    GenerateRandomMines(GenerateAllFalseList(88), 12);
+                    break;
+                case 20:
+                    GenerateRandomMines(GenerateAllFalseList(336), 64);
+                    break;
+                case 30:
+                    GenerateRandomMines(GenerateAllFalseList(711), 189);
+                    break;
+            }
+            return listWithMines;
         }
     }
 }
