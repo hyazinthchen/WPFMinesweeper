@@ -1,32 +1,46 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace WPFMinesweeper.ViewModels
 {
-    public class MainWindowViewModel : ICommand
-    {
-        private readonly Action _action;
+    public class MainWindowViewModel : BaseViewModel {
 
-        //neues MainWindowViewModel mit einer Action, die es ausführen soll
-        public MainWindowViewModel(Action action)
-        {
-            _action = action;
+        private int _currentTime;
+
+        public int CurrentTime {
+            get { return _currentTime;}
+            set {
+                _currentTime = value;
+                OnPropertyChanged("CurrentTime");
+            }
         }
 
-        //Gibt die gewünschte Action als Parameter an das MainWindowViewModel
-        public void Execute(object parameter)
+        public MainWindowViewModel()
         {
-            _action();
+            InitializeTimer();
         }
 
-        //Enabled den Konvertierbutton, bei False ist er disabled
-        public bool CanExecute(object parameter)
-        {
-            return true;
+        private void InitializeTimer() {
+            DispatcherTimer timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromSeconds(1) };
+            timer.Tick += (sender, args) => {
+                CurrentTime++;
+                if (CurrentTime == 30)
+                {
+                    timer.Stop();
+                }
+            };
+            CurrentTime = 0;
+            timer.Start();
         }
 
-        public event EventHandler CanExecuteChanged { add { } remove { } }
+        public ICommand StartTimerAgainCommand {
+            get { return new DelegateCommand(StartTimerAgain);}
+        }
+
+        private void StartTimerAgain() {
+            InitializeTimer();
+        }
     }
 }

@@ -1,13 +1,21 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
-using WPFMinesweeper.Model;
 
 namespace WPFMinesweeper.ViewModels
 {
-    public class MatrixViewModel : ObservableObject {
+    public class MatrixViewModel : BaseViewModel {
+
+        private int _rowCount = 10;
+        private int _columnCount = 10;
+
+        public int RowCount
+        {
+            get { return _rowCount; }
+            set { _rowCount = value; }
+        }
+        public int ColumnCount
+        {
+            get { return _columnCount; }
+            set { _columnCount = value; }
+        }
     }
 }

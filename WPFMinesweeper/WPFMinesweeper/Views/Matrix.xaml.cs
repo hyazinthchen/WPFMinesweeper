@@ -1,19 +1,18 @@
 ﻿using System.Windows.Controls;
+using WPFMinesweeper.ViewModels;
 
 namespace WPFMinesweeper.Views
 {
     /// <summary>
     /// Interaktionslogik für Matrix.xaml
     /// </summary>
-    public partial class Matrix
+    public partial class Matrix : UserControl
     {
         public Matrix()
         {
+            
             InitializeComponent();
-
-            for (int i = 0; i < 100; i++) {
-                Button button = new Button();
-            }
+            //DataContext = new MatrixViewModel();
         }
     }
 }
