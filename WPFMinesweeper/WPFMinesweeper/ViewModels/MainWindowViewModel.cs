@@ -8,6 +8,7 @@ namespace WPFMinesweeper.ViewModels
     public class MainWindowViewModel : BaseViewModel {
 
         private int _currentTime;
+        private DispatcherTimer _timer;
 
         public int CurrentTime {
             get { return _currentTime;}
@@ -23,16 +24,19 @@ namespace WPFMinesweeper.ViewModels
         }
 
         private void InitializeTimer() {
-            DispatcherTimer timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromSeconds(1) };
-            timer.Tick += (sender, args) => {
+            if (_timer != null) {
+                return;
+            }
+            _timer = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromSeconds(1) };
+            _timer.Tick += (sender, args) => {
                 CurrentTime++;
                 if (CurrentTime == 30)
                 {
-                    timer.Stop();
+                    _timer.Stop();
                 }
             };
             CurrentTime = 0;
-            timer.Start();
+            _timer.Start();
         }
 
         public ICommand StartTimerAgainCommand {
@@ -40,7 +44,7 @@ namespace WPFMinesweeper.ViewModels
         }
 
         private void StartTimerAgain() {
-            InitializeTimer();
+            CurrentTime = 0;
         }
     }
 }

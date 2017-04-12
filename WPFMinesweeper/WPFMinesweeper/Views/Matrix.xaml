@@ -5,8 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:WPFMinesweeper.ViewModels"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:converter="clr-namespace:WPFMinesweeper.Converter"
              mc:Ignorable="d">
-
+    
+    <UserControl.Resources>
+        <converter:BoolArrayToDataViewConverter x:Key="BoolArrayToDataViewConverter"/>
+    </UserControl.Resources>
+ 
     <UserControl.DataContext>
         <viewModels:MatrixViewModel/>
     </UserControl.DataContext>
@@ -14,30 +19,9 @@
     <ItemsControl>
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <UniformGrid Rows="{Binding RowCount}" Columns="{Binding ColumnCount}"/>
+                <UniformGrid DataContext="{Binding Matrix, Converter={StaticResource BoolArrayToDataViewConverter}}"></UniformGrid>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <Button Content="{Binding}" FontSize="25" Background="DimGray"/>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        <!--<system:String>&#10026;</system:String>
-        <system:String>-</system:String>
-        <system:String>-</system:String>
-        <system:String>&#10026;</system:String>
-        <system:String>-</system:String>
-        <system:String>-</system:String>
-        <system:String>-</system:String>
-        <system:String>&#10026;</system:String>
-        <system:String>&#10026;</system:String>
-        <system:String>-</system:String>
-        <system:String>&#10026;</system:String>
-        <system:String>-</system:String>
-        <system:String>&#5128;</system:String>
-        <system:String>-</system:String>
-        <system:String>-</system:String>
-        <system:String>&#10026;</system:String>-->
     </ItemsControl>
-
+ 
 </UserControl>

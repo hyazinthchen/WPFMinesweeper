@@ -55,7 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converter\DateTimeToStringConverter.cs" />
+    <Compile Include="Converter\BoolArrayToDataViewConverter.cs" />
+    <Compile Include="Domain\Tile.cs" />
     <Compile Include="Model\MinesweeperModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />

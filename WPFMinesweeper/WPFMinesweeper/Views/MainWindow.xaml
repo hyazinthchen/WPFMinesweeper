@@ -13,7 +13,7 @@
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter"></converter:DateTimeToStringConverter>
+        <converter:BoolArrayToDataViewConverter x:Key="DateTimeToStringConverter"></converter:BoolArrayToDataViewConverter>
     </Window.Resources>
     
     <Grid>
