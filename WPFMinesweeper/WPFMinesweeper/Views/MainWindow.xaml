@@ -1,19 +1,19 @@
 ﻿<Window x:Class="WPFMinesweeper.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:views="clr-namespace:WPFMinesweeper.Views"
         xmlns:viewModels="clr-namespace:WPFMinesweeper.ViewModels"
         xmlns:converter="clr-namespace:WPFMinesweeper.Converter"
         Title="WPFMinesweeper"
-        Height="500" Width="250"
-        ResizeMode="NoResize">
+        Height="500" Width="400"
+        ResizeMode="NoResize"
+        Icon="../mine.ico">
 
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <converter:BoolArrayToDataViewConverter x:Key="DateTimeToStringConverter"></converter:BoolArrayToDataViewConverter>
+        <!-- Platz für Converter o.Ä. -->
     </Window.Resources>
     
     <Grid>
@@ -27,17 +27,21 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Margin="5 30" Background="DimGray" Foreground="White" FontSize="12" IsReadOnly="True"></TextBox>
-            <Button Grid.Column="1" Margin="5 20" Content="&#8634;" FontSize="35" Command="{Binding StartTimerAgainCommand}">
+            
+            <!-- Textbox mit verbleibenden Flaggen -->
+            <TextBox Grid.Column="0" Margin="5 30" Background="DimGray" Foreground="White" FontSize="12" IsReadOnly="True" Text="{Binding FlagsLeft}"></TextBox>
+
+            <!-- Button um neues Spiel zu starten -->
+            <Button Grid.Column="1" Margin="5 30" Content="&#8634;" FontSize="25" Command="{Binding StartTimerAgainCommand}">
                 <Button.ToolTip>
                     <ToolTip>
-                        <TextBlock>
-                            Click to start a new game!   
-                        </TextBlock>
+                        <TextBlock Text="Click to start a new game!"/>
                     </ToolTip>
                 </Button.ToolTip>
             </Button>
-            <TextBox Text="{Binding CurrentTime}"  Grid.Column="2" Margin="5 30" Background="DimGray" Foreground="White" FontSize="12" IsReadOnly="True"></TextBox>
+            
+            <!-- Textbox mit hochzählendem Timer -->
+            <TextBox Grid.Column="2" Margin="5 30" Background="DimGray" Foreground="White" FontSize="12" IsReadOnly="True" Text="{Binding CurrentTime}"></TextBox>
         </Grid>
         <views:Matrix Grid.Row="1"/>
     </Grid>

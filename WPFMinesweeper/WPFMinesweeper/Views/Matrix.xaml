@@ -4,22 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:WPFMinesweeper.ViewModels"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:converter="clr-namespace:WPFMinesweeper.Converter"
              mc:Ignorable="d">
-    
+
     <UserControl.Resources>
-        <converter:BoolArrayToDataViewConverter x:Key="BoolArrayToDataViewConverter"/>
+        <converter:BoolToMineConverter x:Key="BoolToMineConverter"/>
     </UserControl.Resources>
  
     <UserControl.DataContext>
         <viewModels:MatrixViewModel/>
     </UserControl.DataContext>
 
-    <ItemsControl>
+    <ItemsControl ItemsSource="{Binding Tiles}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <!-- Matrix aus Textblöcken mit Minen unter den bedienbaren Buttons -->
+                    <Grid Background="LightSlateGray" Margin="1">
+                        <TextBlock Text="{Binding IsMine, Converter={StaticResource BoolToMineConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    </Grid>
+                    
+                    <!-- durch den User bedienbares Buttongitter -->
+                    <Button Visibility="hidden" Content="{Binding IsFlagged}">
+                        <Button.InputBindings>
+                            <MouseBinding Gesture="RightClick" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.FlagCommand}"/>
+                        </Button.InputBindings>
+                    </Button>
+                    
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <UniformGrid DataContext="{Binding Matrix, Converter={StaticResource BoolArrayToDataViewConverter}}"></UniformGrid>
+                <!-- Grid welches mit Buttons bzw. Textblöcken befüllt wird  -->
+                <UniformGrid Columns="{Binding ColumnCount}" Rows="{Binding RowCount}"/>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
     </ItemsControl>

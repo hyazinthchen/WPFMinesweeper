@@ -10,9 +10,7 @@ namespace WPFMinesweeper.Views
     {
         public Matrix()
         {
-            
             InitializeComponent();
-            //DataContext = new MatrixViewModel();
         }
     }
 }
