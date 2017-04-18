@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using WPFMinesweeper.Domain;
 
 namespace WPFMinesweeper.ViewModels
 {
@@ -10,13 +9,13 @@ namespace WPFMinesweeper.ViewModels
         private int _columnCount = 10;
         private bool[,] field;
         private readonly Random rnd = new Random();
-        private List<Tile> _tiles = new List<Tile>();
+        private List<TileViewModel> _tiles = new List<TileViewModel>();
         private int _mines = 12;
 
         /// <summary>
         /// Liste von Buttons auf dem Spielfeld
         /// </summary>
-        public List<Tile> Tiles {
+        public List<TileViewModel> Tiles {
             get { return _tiles; }
             set { _tiles = value; }
         }
@@ -27,6 +26,7 @@ namespace WPFMinesweeper.ViewModels
         public int RowCount{
             get { return _rowCount; }
         }
+
         /// <summary>
         /// Anzahl der Spalten des Spielfelds
         /// </summary>
@@ -74,24 +74,10 @@ namespace WPFMinesweeper.ViewModels
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
                     bool isMine = field[i, j];
-                    Tile tile = new Tile(i, j, isMine);
-                    _tiles.Add(tile);
+                    TileViewModel tileViewModel = new TileViewModel(i, j, isMine);
+                    _tiles.Add(tileViewModel);
                 }
             }
         }
-
-        public DelegateCommand FlagCommand
-        {
-            get { return new DelegateCommand(FlagButton); }
-        }
-
-        private void FlagButton() {
-
-        }
-
-        private void UnflagButton() {
-
-        }
-
     }
 }

@@ -2,23 +2,18 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace WPFMinesweeper.Converter
-{
-    /// <summary>
-    /// Konvertiert einen Boolschen Wert zu einem String
-    /// </summary>
-    public class BoolToMineConverter : IValueConverter
-    {
+namespace WPFMinesweeper.Converter {
+    public class BoolToFlagConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
 
-            string Mine = "💣";
-            string noMine = "-";
+            string Flag = "ᐈ";
+            string noFlag = "";
 
             bool boolValue = (bool) value;
             if (boolValue == true) {
-                return Mine;
+                return Flag;
             } else {
-                return noMine;
+                return noFlag;
             }
         }
 

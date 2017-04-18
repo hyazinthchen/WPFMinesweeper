@@ -9,6 +9,8 @@
 
     <UserControl.Resources>
         <converter:BoolToMineConverter x:Key="BoolToMineConverter"/>
+        <converter:BoolToFlagConverter x:Key="BoolToFlagConverter"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
  
     <UserControl.DataContext>
@@ -25,9 +27,9 @@
                     </Grid>
                     
                     <!-- durch den User bedienbares Buttongitter -->
-                    <Button Visibility="hidden" Content="{Binding IsFlagged}">
+                    <Button Visibility="{Binding IsRevealed, Converter={StaticResource BoolToVisibilityConverter}}" Content="{Binding IsFlagged, Converter={StaticResource BoolToFlagConverter}}" Command="{Binding RevealCommand}">
                         <Button.InputBindings>
-                            <MouseBinding Gesture="RightClick" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.FlagCommand}"/>
+                            <MouseBinding Gesture="RightClick" Command="{Binding FlagCommand}"/>
                         </Button.InputBindings>
                     </Button>
                     

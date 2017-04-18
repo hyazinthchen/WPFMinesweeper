@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Com.QueoFlow.Commons;
 
 namespace WPFMinesweeper.ViewModels
 {
@@ -16,8 +17,8 @@ namespace WPFMinesweeper.ViewModels
         public int FlagsLeft {
             get { return _flagsLeft; }
             set {
-                _flagsLeft = value; 
-                OnPropertyChanged("FlagsLeft");
+                _flagsLeft = value;
+                OnPropertyChanged(this.GetPropertyName(x => x.FlagsLeft));
             }
         }
 
@@ -28,7 +29,7 @@ namespace WPFMinesweeper.ViewModels
             get { return _currentTime;}
             set {
                 _currentTime = value;
-                OnPropertyChanged("CurrentTime");
+                OnPropertyChanged(this.GetPropertyName(x => x.CurrentTime));
             }
         }
 
@@ -63,13 +64,13 @@ namespace WPFMinesweeper.ViewModels
         /// Command zum Timer-Restart bei neuem Spiel
         /// </summary>
         public ICommand StartTimerAgainCommand {
-            get { return new DelegateCommand(StartTimerAgain);}
+            get { return new DelegateCommand(ExecuteStartTimerAgain);}
         }
 
         /// <summary>
         /// Setzt die Zeit bei neuem Spiel zurück
         /// </summary>
-        private void StartTimerAgain() {
+        private void ExecuteStartTimerAgain(object parameter) {
             CurrentTime = 0;
         }
     }

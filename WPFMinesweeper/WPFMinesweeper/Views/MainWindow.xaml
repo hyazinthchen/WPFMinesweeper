@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:WPFMinesweeper.Views"
         xmlns:viewModels="clr-namespace:WPFMinesweeper.ViewModels"
-        xmlns:converter="clr-namespace:WPFMinesweeper.Converter"
         Title="WPFMinesweeper"
         Height="500" Width="400"
         ResizeMode="NoResize"
@@ -12,10 +11,7 @@
     <Window.DataContext>
         <viewModels:MainWindowViewModel/>
     </Window.DataContext>
-    <Window.Resources>
-        <!-- Platz für Converter o.Ä. -->
-    </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"></RowDefinition>
