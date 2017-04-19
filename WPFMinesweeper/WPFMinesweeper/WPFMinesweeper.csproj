@@ -62,10 +62,11 @@
     <Compile Include="Converter\BoolToFlagConverter.cs" />
     <Compile Include="Converter\BoolToMineConverter.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="IEventBus.cs" />
+    <Compile Include="EventBus.cs" />
     <Compile Include="ViewModels\TileViewModel.cs" />
     <Compile Include="Model\MinesweeperModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
-    <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\Matrix.xaml.cs">
       <DependentUpon>Matrix.xaml</DependentUpon>
     </Compile>
