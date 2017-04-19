@@ -9,7 +9,7 @@
         Icon="../mine.ico">
 
     <Window.DataContext>
-        <viewModels:MainWindowViewModel/>
+        <viewModels:MatrixViewModel/>
     </Window.DataContext>
 
     <Grid>
