@@ -1,16 +1,13 @@
 ﻿using System;
 
-namespace WPFMinesweeper
-{
+namespace WPFMinesweeper {
     /// <summary>
-    /// Interface für den EventBus
+    ///     Interface für den EventBus
     /// </summary>
     public interface IEventBus {
-
-        //TMessage = Typ der Message die verschickt wird
-        void Subscribe<TMessage>(Action<TMessage> handler);
-        void Unsubscribe<TMessage>(Action<TMessage> handler);
         void Publish<TMessage>(TMessage message);
+        //TMessage = Typ der Message die verschickt wird
+        Action<TMessage> Subscribe<TMessage>(Action<TMessage> handler);
+        void Unsubscribe<TMessage>(Action<TMessage> handler);
     }
-    
 }

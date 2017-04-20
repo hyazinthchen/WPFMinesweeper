@@ -1,9 +1,11 @@
-﻿using Com.QueoFlow.Commons;
+﻿using System;
+using Com.QueoFlow.Commons;
 
 namespace WPFMinesweeper.ViewModels {
     public class TileViewModel : BaseViewModel {
-        private bool _isFlagged;
+        public delegate void ChangedEventHandler(object sender, EventArgs e);
 
+        private bool _isFlagged;
         private bool _isMine;
         private bool _isRevealed;
         private int _x;
@@ -81,12 +83,17 @@ namespace WPFMinesweeper.ViewModels {
             set { _y = value; }
         }
 
+        public event ChangedEventHandler Flagged;
+
         /// <summary>
         ///     Markiert den Button mit einer Flagge
         /// </summary>
         private void ExecuteFlagButton(object parameter) {
             if (IsFlagged == false) {
                 IsFlagged = true;
+                if (Flagged != null) {
+                    Flagged(this, EventArgs.Empty);
+                }
             } else {
                 IsFlagged = false;
             }

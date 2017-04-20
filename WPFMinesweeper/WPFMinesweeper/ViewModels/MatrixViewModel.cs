@@ -6,21 +6,26 @@ using Com.QueoFlow.Commons;
 
 namespace WPFMinesweeper.ViewModels {
     public class MatrixViewModel : BaseViewModel {
+
         private readonly Random rnd = new Random();
         private readonly int _columnCount = 10;
         private int _currentTime;
         private int _flagsLeft = 12;
         private readonly int _mines = 12;
-
         private readonly int _rowCount = 10;
         private List<TileViewModel> _tiles = new List<TileViewModel>();
         private DispatcherTimer _timer;
         private bool[,] field;
+        private readonly IEventBus _eventBus;
 
         /// <summary>
         ///     Konstruktor für das MatrixViewModel
         /// </summary>
-        public MatrixViewModel() {
+        /// <param name="eventBus">Referenziert den EventBus</param>
+        public MatrixViewModel(/*IEventBus eventBus*/) {
+            //_eventBus = eventBus;
+            //eventBus.Subscribe();
+
             CalculateMines();
             GenerateMatrix();
             InitializeTimer();
@@ -135,6 +140,22 @@ namespace WPFMinesweeper.ViewModels {
             };
             CurrentTime = 0;
             _timer.Start();
+        }
+
+        /// <summary>
+        /// Subtrahiert Flaggen
+        /// </summary>
+        private void SubtractFromFlagsLeft()
+        {
+            FlagsLeft = FlagsLeft - 1;
+        }
+
+        /// <summary>
+        /// Addiert Flaggen
+        /// </summary>
+        private void AddToFlagsLeft()
+        {
+            FlagsLeft = FlagsLeft + 1;
         }
     }
 }
