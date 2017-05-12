@@ -3,6 +3,12 @@ using Com.QueoFlow.Commons;
 
 namespace WPFMinesweeper.ViewModels {
     public class TileViewModel : BaseViewModel {
+
+        /// <summary>
+        /// Delegat ChangedEventHandler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public delegate void ChangedEventHandler(object sender, EventArgs e);
 
         private bool _isFlagged;
@@ -83,6 +89,9 @@ namespace WPFMinesweeper.ViewModels {
             set { _y = value; }
         }
 
+        /// <summary>
+        /// Flagged-Event 
+        /// </summary>
         public event ChangedEventHandler Flagged;
 
         /// <summary>
