@@ -1,5 +1,5 @@
 ﻿using System;
-using Com.QueoFlow.Commons;
+using WPFMinesweeper.Model;
 
 namespace WPFMinesweeper.ViewModels {
     public class TileViewModel : BaseViewModel {
@@ -11,6 +11,7 @@ namespace WPFMinesweeper.ViewModels {
         /// <param name="e"></param>
         public delegate void ChangedEventHandler(object sender, EventArgs e);
 
+        private static MinesweeperModel _minesweeperModel = new MinesweeperModel(12);
         private bool _isFlagged;
         private bool _isMine;
         private bool _isRevealed;
@@ -30,6 +31,14 @@ namespace WPFMinesweeper.ViewModels {
         }
 
         /// <summary>
+        ///     Liefert das Model
+        /// </summary>
+        public static MinesweeperModel MinesweeperModel
+        {
+            get { return _minesweeperModel; }
+        }
+
+        /// <summary>
         ///     Command zum Flaggen von Buttons
         /// </summary>
         public DelegateCommand FlagCommand {
@@ -43,7 +52,7 @@ namespace WPFMinesweeper.ViewModels {
             get { return _isFlagged; }
             set {
                 _isFlagged = value;
-                OnPropertyChanged(this.GetPropertyName(x => x.IsFlagged));
+                OnPropertyChanged("IsFlagged");
             }
         }
 
@@ -62,7 +71,7 @@ namespace WPFMinesweeper.ViewModels {
             get { return _isRevealed; }
             set {
                 _isRevealed = value;
-                OnPropertyChanged(this.GetPropertyName(x => x.IsRevealed));
+                OnPropertyChanged("IsRevealed");
             }
         }
 
@@ -100,11 +109,13 @@ namespace WPFMinesweeper.ViewModels {
         private void ExecuteFlagButton(object parameter) {
             if (IsFlagged == false) {
                 IsFlagged = true;
+                MinesweeperModel.FlagsLeft = MinesweeperModel.FlagsLeft - 1;
                 if (Flagged != null) {
                     Flagged(this, EventArgs.Empty);
                 }
             } else {
                 IsFlagged = false;
+                MinesweeperModel.FlagsLeft = MinesweeperModel.FlagsLeft + 1;
             }
         }
 

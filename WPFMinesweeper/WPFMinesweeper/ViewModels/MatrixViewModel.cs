@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Com.QueoFlow.Commons;
+using WPFMinesweeper.Model;
 
 namespace WPFMinesweeper.ViewModels {
     public class MatrixViewModel : BaseViewModel {
 
+        private static MinesweeperModel _minesweeperModel = new MinesweeperModel(12);
         private readonly Random rnd = new Random();
-        private readonly int _columnCount = 10;
+        private readonly int _columnCount = MinesweeperModel.ColumnCount;
         private int _currentTime;
-        private int _flagsLeft = 12;
-        private readonly int _mines = 12;
-        private readonly int _rowCount = 10;
+        private readonly int _mines = MinesweeperModel.Mines;
+        private int _flagsLeft = MinesweeperModel.FlagsLeft;
+        private readonly int _rowCount = MinesweeperModel.RowCount;
         private List<TileViewModel> _tiles = new List<TileViewModel>();
         private DispatcherTimer _timer;
         private bool[,] field;
@@ -25,7 +26,6 @@ namespace WPFMinesweeper.ViewModels {
         public MatrixViewModel(/*IEventBus eventBus*/) {
             //_eventBus = eventBus;
             //eventBus.Subscribe();
-
             CalculateMines();
             GenerateMatrix();
             InitializeTimer();
@@ -45,7 +45,7 @@ namespace WPFMinesweeper.ViewModels {
             get { return _currentTime; }
             set {
                 _currentTime = value;
-                OnPropertyChanged(this.GetPropertyName(x => x.CurrentTime));
+                OnPropertyChanged("CurrentTime");
             }
         }
 
@@ -55,8 +55,8 @@ namespace WPFMinesweeper.ViewModels {
         public int FlagsLeft {
             get { return _flagsLeft; }
             set {
-                _flagsLeft = value;
-                OnPropertyChanged(this.GetPropertyName(x => x.FlagsLeft));
+                MinesweeperModel.FlagsLeft = value;
+                OnPropertyChanged("FlagsLeft");
             }
         }
 
@@ -80,6 +80,13 @@ namespace WPFMinesweeper.ViewModels {
         public List<TileViewModel> Tiles {
             get { return _tiles; }
             set { _tiles = value; }
+        }
+
+        /// <summary>
+        ///     Liefert das Model
+        /// </summary>
+        public static MinesweeperModel MinesweeperModel{
+            get { return _minesweeperModel; }
         }
 
         /// <summary>
@@ -147,7 +154,7 @@ namespace WPFMinesweeper.ViewModels {
         /// </summary>
         private void SubtractFromFlagsLeft()
         {
-            FlagsLeft = FlagsLeft - 1;
+            MinesweeperModel.FlagsLeft = MinesweeperModel.FlagsLeft - 1;
         }
 
         /// <summary>
@@ -155,7 +162,7 @@ namespace WPFMinesweeper.ViewModels {
         /// </summary>
         private void AddToFlagsLeft()
         {
-            FlagsLeft = FlagsLeft + 1;
+            MinesweeperModel.FlagsLeft = MinesweeperModel.FlagsLeft + 1;
         }
     }
 }

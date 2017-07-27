@@ -1,49 +1,45 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace WPFMinesweeper.Model
+﻿namespace WPFMinesweeper.Model
 {
-    class MinesweeperModel
-    {
-        public static List<bool> listWithoutMines = new List<bool>();
-        public static List<bool> listWithMines = new List<bool>();
-        public static Random rnd = new Random();
+    public class MinesweeperModel {
+        private int _mines = 12;
+        private int _flagsLeft;
+        private int _columnCount = 10;
+        private int _rowCount = 10;
 
-        public static List<bool> GenerateRandomMines(List<bool> allFalseList, int mineCount)
-        {
-            for (int i = 0; i < mineCount; i++)
-            {
-                int index = rnd.Next(0, allFalseList.Count + 1);
-                listWithoutMines.Insert(index, true);
-            }
-            listWithMines = listWithoutMines;
-            return listWithMines;
+
+        public MinesweeperModel(int flagsLeft) {
+            FlagsLeft = flagsLeft;
         }
 
-        public static List<bool> GenerateAllFalseList(int size)
-        {
-            for (int i = 0; i < size; i++)
-            {
-                listWithoutMines.Add(false);
-            }
-            return listWithoutMines;
+        /// <summary>
+        ///     Anzahl noch verbleibender Flaggen
+        /// </summary>
+        public int FlagsLeft{
+            get { return _flagsLeft; }
+            set { _flagsLeft = value; }
         }
 
-        public static List<bool> GenerateMatrixMines(int fieldsize) {
-            switch (fieldsize)
-            {
-                case 10:
-                    GenerateRandomMines(GenerateAllFalseList(88), 12);
-                    break;
-                case 20:
-                    GenerateRandomMines(GenerateAllFalseList(336), 64);
-                    break;
-                case 30:
-                    GenerateRandomMines(GenerateAllFalseList(711), 189);
-                    break;
-            }
-            return listWithMines;
+        /// <summary>
+        /// Anzahl der zu setzenden Minen
+        /// </summary>
+        public int Mines{
+            get { return _mines; }
         }
+
+        /// <summary>
+        ///     Anzahl der Reihen des Spielfelds
+        /// </summary>
+        public int RowCount {
+            get { return _rowCount; }
+        }
+
+        /// <summary>
+        ///     Anzahl der Spalten des Spielfelds
+        /// </summary>
+        public int ColumnCount {
+            get { return _columnCount; }
+        }
+
+
     }
 }
